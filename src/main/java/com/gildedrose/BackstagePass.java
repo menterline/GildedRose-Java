@@ -13,14 +13,7 @@ public class BackstagePass implements IItem {
         this.quality = quality;
     }
 
-    public int getQuality() {
-        return quality;
-    }
-    public int getSellIn() {
-        return sellIn;
-    }
-
-    public void updateQuality() {
+    public int GetUpdatedQuality() {
         if (sellIn <= 0) {
             quality = 0;
         } else if (sellIn < 6) {
@@ -30,10 +23,12 @@ public class BackstagePass implements IItem {
         } else {
             quality = Math.min(50, quality + 1);
         }
+        return quality;
     }
 
-    public void updateSellIn() {
+    public int GetUpdatedSellin() {
         sellIn = sellIn - 1;
+        return sellIn;
     }
     
     

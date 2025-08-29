@@ -10,19 +10,13 @@ public class Sulfuras implements IItem {
         this.sellIn = sellIn;
         this.quality = 80;
     }
-    public int getQuality() {
+
+    public int GetUpdatedQuality() {
         return quality;
     }
-    public int getSellIn() {
+
+    public int GetUpdatedSellin() {
         return sellIn;
-    }
-
-    public void updateQuality() {
-        return;
-    }
-
-    public void updateSellIn() {
-        return;
     }
     
     

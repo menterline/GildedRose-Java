@@ -11,19 +11,12 @@ public class BaseItem implements IItem {
         this.quality = quality;
     }
 
-    public int getQuality() {
-        return quality;
-    }
-    public int getSellIn() {
-        return sellIn;
+    public int GetUpdatedQuality() {
+        return 0;
     }
 
-    public void updateQuality() {
-        return;
-    }
-
-    public void updateSellIn() {
-        return;
+    public int GetUpdatedSellin() {
+        return 0;
     }
     
     

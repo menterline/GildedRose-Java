@@ -10,10 +10,8 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) { 
             IItem iItem = parseItem(item);
-            iItem.updateQuality();
-            iItem.updateSellIn();
-            item.quality = iItem.getQuality();
-            item.sellIn = iItem.getSellIn();
+            item.quality =iItem.GetUpdatedQuality();
+            item.sellIn = iItem.GetUpdatedSellin();
         }
     }
 
