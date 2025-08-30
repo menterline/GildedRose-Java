@@ -10,7 +10,7 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) { 
             IItem iItem = parseItem(item);
-            item.quality =iItem.GetUpdatedQuality();
+            item.quality = iItem.GetUpdatedQuality();
             item.sellIn = iItem.GetUpdatedSellin();
         }
     }
