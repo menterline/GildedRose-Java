@@ -31,12 +31,23 @@ public class Updater {
     public static UpdateResult Sulfuras(int quality, int sellIn) {
         return new UpdateResult(sellIn, quality);
     }
+
     public static UpdateResult NormalItem(int quality, int sellIn) {
         int newQuality = Math.max(0, quality - 1);
         if (sellIn <= 1) {
             newQuality = Math.max(0, newQuality - 1);
         }
         int newSellIn = sellIn - 1;
+        return new UpdateResult(newSellIn, newQuality);
+    }
+
+    public static UpdateResult Conjured(Item originalItem, UpdateResult inputResult) {
+        int multiplier = 1;
+        if (originalItem.name.startsWith("Conjured")) {
+            multiplier = 2;
+        }
+        int newQuality = Math.max(0, originalItem.quality - multiplier * (originalItem.quality - inputResult.quality));
+        int newSellIn = inputResult.sellIn;
         return new UpdateResult(newSellIn, newQuality);
     }
 }

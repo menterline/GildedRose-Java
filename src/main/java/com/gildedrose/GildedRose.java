@@ -69,11 +69,7 @@ class GildedRose {
             UpdateResult result = updater.get();
             int newQuality = result.quality;
             int newSellin = result.sellIn;
-            int multiplier = 1; // Conjured items degrade twice as fast
-            if (item.name.startsWith("Conjured")) {
-                multiplier = 2;
-            }
-            item.quality = item.quality - (item.quality - newQuality) * multiplier;
+            item.quality = newQuality;
             item.sellIn = newSellin;
         }
     }
@@ -87,7 +83,7 @@ class GildedRose {
             case "Sulfuras, Hand of Ragnaros":
                 return () -> Updater.Sulfuras(item.quality, item.sellIn);
             default:
-                return () -> Updater.NormalItem(item.quality, item.sellIn);
+                return () -> Updater.Conjured(item, Updater.NormalItem(item.quality, item.sellIn));
         }
     }
 }
