@@ -12,11 +12,17 @@ public class BaseItem implements IItem {
     }
 
     public int GetUpdatedQuality() {
-        return 0;
+
+        quality = Math.max(0, quality - 1);
+        if (sellIn <= 1) {
+            quality = Math.max(0, quality - 1);
+        }
+        return quality;
     }
 
     public int GetUpdatedSellin() {
-        return 0;
+        sellIn = sellIn - 1;
+        return sellIn;
     }
     
     
