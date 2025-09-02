@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 class GildedRose {
     Item[] items;
 
@@ -62,29 +65,29 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            IItem iItem = parseItem(item);
-            int newQuality = iItem.GetUpdatedQuality();
-            int newSellin = iItem.GetUpdatedSellin();
+            Supplier<UpdateResult> updater = parseItem(item);
+            UpdateResult result = updater.get();
+            int newQuality = result.quality;
+            int newSellin = result.sellIn;
             int multiplier = 1; // Conjured items degrade twice as fast
             if (item.name.startsWith("Conjured")) {
                 multiplier = 2;
             }
-            System.out.println(newQuality + " " + newSellin + " " + multiplier);
             item.quality = item.quality - (item.quality - newQuality) * multiplier;
             item.sellIn = newSellin;
         }
     }
 
-    private IItem parseItem(Item item) {
+    private Supplier<UpdateResult> parseItem(Item item) {
         switch (item.name) {
             case "Aged Brie":
-                return new AgedBrie(item.name, item.sellIn, item.quality);
+                return () -> Updater.AgedBrie(item.quality, item.sellIn);
             case "Backstage passes to a TAFKAL80ETC concert":
-                return new BackstagePass(item.name, item.sellIn, item.quality);
+                return () -> Updater.BackstagePass(item.quality, item.sellIn);
             case "Sulfuras, Hand of Ragnaros":
-                return new Sulfuras(item.name, item.sellIn, item.quality);
+                return () -> Updater.Sulfuras(item.quality, item.sellIn);
             default:
-                return new BaseItem(item.name, item.sellIn, item.quality);
+                return () -> Updater.NormalItem(item.quality, item.sellIn);
         }
     }
 }
